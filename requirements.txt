@@ -1,0 +1,13 @@
+black
+black
+graphviz
+mkdocs
+mkdocs-material
+mkdocstrings
+mkdocstrings-python
+nbstripout
+pre-commit
+pre-commit
+pydantic_settings
+python-dotenv
+sqlmesh[web,databricks,mssql,postgres,github]

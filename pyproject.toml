@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omopex"
+description = "Python application generating project-specific OMOP databases."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name = "vvcb" }]
+dependencies = [
+    "sqlmesh",
+    "pydantic-settings",
+    "python-dotenv",
+    "graphviz",
+    "sqlmesh[web,databricks,postgres,github]",
+]
+dynamic = ["version"]
+
+[tool.setuptools]
+packages = ["omopex"]
+
+[tool.setuptools.dynamic]
+version = { attr = "omopex.__version__" }
+
+[project.urls]
+Homepage = "https://github.com/lsc-sde/omopex"
+# Documentation = "https://lsc-sde.github.io/omopex/"
+
+[project.optional-dependencies]
+
+dev = [
+    "black",
+    "mkdocs-material",
+    "mkdocs",
+    "mkdocstrings-python",
+    "mkdocstrings",
+    "nbstripout",
+    "pre-commit",
+]
+
+mssql = ["sqlmesh[mssql]"]
+
+
+[tool.isort]
+profile = "black"
