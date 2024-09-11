@@ -1,7 +1,7 @@
 MODEL (
   name @dest_schema.visit_detail,
   kind VIEW,
-  cron '@monthly',
+  cron '@daily',
     );
 
 SELECT

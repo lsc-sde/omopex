@@ -1,7 +1,7 @@
 MODEL (
   name @dest_schema.death,
   kind VIEW,
-  cron '@monthly',
+  cron '@daily',
     );
 
 SELECT
@@ -17,7 +17,7 @@ WHERE
   EXISTS(
     SELECT
       1
-    FROM @stg_schema.z__cohort AS c
+    FROM @stg_schema.stg_cohort AS c
     WHERE
       c.person_id = d.person_id
   )

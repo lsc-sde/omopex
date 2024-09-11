@@ -1,7 +1,7 @@
 MODEL (
-  name @stg_schema.z__cohort,
+  name @stg_schema.stg_cohort,
   kind VIEW,
-  cron '@monthly'
+  cron '@daily'
 );
 
 SELECT DISTINCT

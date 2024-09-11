@@ -1,7 +1,7 @@
 MODEL (
   name @dest_schema.procedure_occurrence,
   kind VIEW,
-  cron '@monthly',
+  cron '@daily',
     );
 
 SELECT

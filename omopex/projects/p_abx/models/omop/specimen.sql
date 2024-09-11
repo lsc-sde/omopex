@@ -1,7 +1,7 @@
 MODEL (
   name @dest_schema.specimen,
   kind VIEW,
-  cron '@monthly',
+  cron '@daily',
     );
 
 SELECT

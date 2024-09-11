@@ -1,7 +1,7 @@
 MODEL (
   name @dest_schema.condition_occurrence,
   kind VIEW,
-  cron '@monthly',
+  cron '@daily',
   );
 
 SELECT
@@ -26,7 +26,7 @@ WHERE
   EXISTS(
     SELECT
       1
-    FROM @stg_schema.z__cohort AS c
+    FROM @stg_schema.stg_cohort AS c
     WHERE
       c.person_id = co.person_id
   )

@@ -2,15 +2,13 @@ from pathlib import Path
 from typing import Tuple, Type
 from sqlmesh.core.config import Config
 
-import os
-from omopex.config.omop_config import (
+
+from omopex.settings import (
+    SQLMeshSettings,
     OMOPSettings,
     SourceShema,
     CdmSourceSettings,
-    ModelSettings,
 )
-from omopex.config.sqlmesh_config import OmopExConfig
-import json
 
 project = Path(__file__).parent.stem
 
@@ -22,19 +20,18 @@ settings = {
     "cfg_visit_occurrence": {"start_date": "2018-01-01"},
     "cfg_cdm_source": dict(cfg_cdm_source.model_dump(mode="json")),
 }
-print(settings)
+
 variables = OMOPSettings(
     project=project,
-    src_catalog=os.getenv("DATABRICKS_CATALOG"),
-    src_schema=SourceShema.GOLD,
-    dest_catalog=os.getenv("DATABRICKS_CATALOG"),
+    # src_catalog=os.getenv("DATABRICKS_CATALOG"),
+    src_schema="dbo",
+    # dest_catalog=os.getenv("DATABRICKS_CATALOG"),
     settings=settings,
 )
 
-
 config = Config(
     **dict(
-        OmopExConfig(
+        SQLMeshSettings(
             project=project,
             variables=variables.model_dump(mode="json"),
         )

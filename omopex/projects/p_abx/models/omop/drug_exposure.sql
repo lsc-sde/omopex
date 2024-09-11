@@ -1,7 +1,7 @@
 MODEL (
   name @dest_schema.drug_exposure,
   kind VIEW,
-  cron '@monthly',
+  cron '@daily',
     );
 
 SELECT

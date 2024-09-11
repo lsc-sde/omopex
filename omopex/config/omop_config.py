@@ -2,6 +2,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import BaseModel, computed_field
 from typing import Optional
 from datetime import date
+from omopex.config.sqlmesh_config import default_gateway, DefaultGateway
+import os
 
 from enum import Enum
 
@@ -177,9 +179,8 @@ class ModelSettings(BaseModel):
 
 class OMOPSettings(BaseSettings):
     project: str
-    src_catalog: str
     src_schema: Optional[SourceShema] = "gold"
-    dest_catalog: str
+    # dest_catalog: str
     # model_settings: Optional[ModelSettings] = ModelSettings()
 
     settings: Optional[dict]
@@ -198,3 +199,13 @@ class OMOPSettings(BaseSettings):
     @property
     def temp_schema(self) -> str:
         return "temp_" + self.dest_schema
+
+    @computed_field
+    @property
+    def src_catalog(self) -> str:
+        if default_gateway == DefaultGateway.DATABRICKS:
+            return os.getenv("DATABRICKS_SOURCE_CATALOG")
+        elif default_gateway == DefaultGateway.MSSQL:
+            return os.getenv("MSSQL_SOURCE_DATABASE")
+        elif default_gateway == DefaultGateway.DUCKDB:
+            return os.getenv("DUCKDB_DATABASE")

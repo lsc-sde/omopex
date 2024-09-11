@@ -1,7 +1,7 @@
 MODEL (
   name @dest_schema.fact_relationship,
   kind VIEW,
-  cron '@monthly',
+  cron '@daily',
   );
 
 SELECT

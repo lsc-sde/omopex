@@ -1,0 +1,36 @@
+from omopex.projects.p_abx.config import cfg_cdm_source
+import pandas as pd
+import typing as t
+from datetime import datetime
+
+from sqlmesh import ExecutionContext, model
+from sqlmesh.core.model import ModelKindName, ModelKind
+
+
+@model(
+    name="@dest_schema.cdm_source",
+    kind=ModelKindName.FULL,
+    columns={
+        "cdm_source_name": "str",
+        "cdm_source_abbreviation": "str",
+        "cdm_holder": "str",
+        "source_description": "str",
+        "cdm_version": "str",
+        "source_documentation_reference": "str",
+        "cdm_etl_reference": "str",
+        "source_release_date": "str",
+        "cdm_release_date": "str",
+        "vocabulary_version": "str",
+    },
+)
+def execute(
+    context: ExecutionContext,
+    start: datetime,
+    end: datetime,
+    execution_time: datetime,
+    **kwargs: t.Any,
+) -> pd.DataFrame:
+
+    df = pd.DataFrame(data=cfg_cdm_source.model_dump(mode="json"))
+
+    return df
