@@ -1,5 +1,5 @@
 MODEL (
-  name  @dest_schema.concept_synonym,
+  name @dest_schema.concept_synonym,
   kind VIEW,
   cron '@yearly'
 );

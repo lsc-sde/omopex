@@ -1,5 +1,5 @@
 MODEL (
-  name  @dest_schema.source_to_concept_map,
+  name @dest_schema.source_to_concept_map,
   kind VIEW,
   cron '@yearly'
 );

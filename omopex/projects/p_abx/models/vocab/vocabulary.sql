@@ -1,5 +1,5 @@
 MODEL (
-  name  @dest_schema.vocabulary,
+  name @dest_schema.vocabulary,
   kind VIEW,
   cron '@yearly'
 );

@@ -1,8 +1,8 @@
 MODEL (
   name @dest_schema.fact_relationship,
   kind VIEW,
-  cron '@daily',
-  );
+  cron '@daily'
+);
 
 SELECT
   fr.domain_concept_id_1,

@@ -1,8 +1,8 @@
 MODEL (
   name @dest_schema.condition_occurrence,
   kind VIEW,
-  cron '@daily',
-  );
+  cron '@daily'
+);
 
 SELECT
   co.condition_occurrence_id,

@@ -1,5 +1,5 @@
 MODEL (
-  name  @dest_schema.relationship,
+  name @dest_schema.relationship,
   kind VIEW,
   cron '@yearly'
 );

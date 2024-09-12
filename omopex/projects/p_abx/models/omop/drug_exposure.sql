@@ -1,8 +1,8 @@
 MODEL (
   name @dest_schema.drug_exposure,
   kind VIEW,
-  cron '@daily',
-    );
+  cron '@daily'
+);
 
 SELECT
   de.drug_exposure_id,

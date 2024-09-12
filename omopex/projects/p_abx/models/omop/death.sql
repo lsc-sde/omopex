@@ -1,8 +1,8 @@
 MODEL (
   name @dest_schema.death,
   kind VIEW,
-  cron '@daily',
-    );
+  cron '@daily'
+);
 
 SELECT
   d.person_id,

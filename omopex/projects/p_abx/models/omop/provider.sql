@@ -1,8 +1,8 @@
 MODEL (
   name @dest_schema.provider,
   kind VIEW,
-  cron '@daily',
-    );
+  cron '@daily'
+);
 
 SELECT
   p.provider_id,

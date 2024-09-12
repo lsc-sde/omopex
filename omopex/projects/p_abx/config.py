@@ -24,7 +24,7 @@ settings = {
 variables = OMOPSettings(
     project=project,
     # src_catalog=os.getenv("DATABRICKS_CATALOG"),
-    src_schema="dbo",
+    src_schema="gold",
     # dest_catalog=os.getenv("DATABRICKS_CATALOG"),
     settings=settings,
 )

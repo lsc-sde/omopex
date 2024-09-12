@@ -1,8 +1,8 @@
 MODEL (
   name @dest_schema.observation,
   kind VIEW,
-  cron '@daily',
-    );
+  cron '@daily'
+);
 
 SELECT
   o.observation_id,
@@ -25,8 +25,6 @@ SELECT
   o.qualifier_source_value,
   o.value_source_value,
   o.observation_event_id,
-  o.obs_event_field_concept_id,
-  -- o.unique_key,
-  -- o.datasource,
-  -- o.updated_at
+  o.obs_event_field_concept_id
+/* o.unique_key, */ /* o.datasource, */ /* o.updated_at */
 FROM @src_catalog.@src_schema.observation AS o

@@ -1,8 +1,8 @@
 MODEL (
   name @dest_schema.location,
   kind VIEW,
-  cron '@daily',
-    );
+  cron '@daily'
+);
 
 SELECT
   l.location_id,

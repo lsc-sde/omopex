@@ -1,8 +1,8 @@
 MODEL (
   name @dest_schema.specimen,
   kind VIEW,
-  cron '@daily',
-    );
+  cron '@daily'
+);
 
 SELECT
   s.specimen_id,

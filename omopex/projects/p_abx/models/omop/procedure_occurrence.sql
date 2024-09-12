@@ -1,8 +1,8 @@
 MODEL (
   name @dest_schema.procedure_occurrence,
   kind VIEW,
-  cron '@daily',
-    );
+  cron '@daily'
+);
 
 SELECT
   po.procedure_occurrence_id,

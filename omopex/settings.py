@@ -73,7 +73,6 @@ gateway_databricks = GatewayConfig(
     state_schema=state_schema,
 )
 
-print(gateway_databricks.model_dump())
 # MSSQL
 
 gateway_mssql = GatewayConfig(

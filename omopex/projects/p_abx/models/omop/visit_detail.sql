@@ -1,8 +1,8 @@
 MODEL (
   name @dest_schema.visit_detail,
   kind VIEW,
-  cron '@daily',
-    );
+  cron '@daily'
+);
 
 SELECT
   vd.visit_detail_id,
