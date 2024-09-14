@@ -8,7 +8,7 @@ MODEL (
 SELECT
   p.person_id,
   p.gender_concept_id,
-  p.year_of_birth::INT, /* This is the year the patient was born */
+  p.year_of_birth::INT,
   p.month_of_birth::INT,
   1 AS day_of_birth,
   p.race_concept_id,
@@ -25,10 +25,4 @@ SELECT
   NULL AS ethnicity_source_concept_id
 FROM @src_catalog.@src_schema.person AS p
 WHERE
-  EXISTS(
-    SELECT
-      1
-    FROM @stg_schema.stg_cohort AS c
-    WHERE
-      c.person_id = p.person_id
-  )
+  @person_exists_in_cohort('p')

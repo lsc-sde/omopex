@@ -22,3 +22,5 @@ SELECT
   po.procedure_source_concept_id,
   po.modifier_source_value
 FROM @src_catalog.@src_schema.procedure_occurrence AS po
+WHERE
+  @person_exists_in_cohort('po')

@@ -21,3 +21,6 @@ SELECT
   s.anatomic_site_source_value,
   s.disease_status_source_value
 FROM @src_catalog.@src_schema.specimen AS s
+WHERE
+  s.specimen_datetime BETWEEN @study_start_date AND CURRENT_DATE /* this doesn' t work yet.Hard code instead. */
+  AND @person_exists_in_cohort('s')

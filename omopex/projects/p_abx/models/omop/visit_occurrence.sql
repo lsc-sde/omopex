@@ -20,5 +20,9 @@ SELECT
   vo.admitted_from_concept_id,
   vo.admitted_from_source_value,
   vo.discharged_to_concept_id,
-  vo.preceding_visit_occurrence_id
-FROM @src_catalog.@src_schema.visit_occurrence AS vo /* where @between_dates(vo, visit_start_date) -- this doesn't work yet. Hard code instead. */
+  vo.preceding_visit_occurrence_id,
+  @project AS project
+FROM @src_catalog.@src_schema.visit_occurrence AS vo
+WHERE
+  vo.visit_start_datetime BETWEEN @study_start_date AND CURRENT_DATE
+  AND @person_exists_in_cohort('vo')

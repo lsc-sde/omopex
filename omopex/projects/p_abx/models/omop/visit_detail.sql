@@ -24,3 +24,6 @@ SELECT
   vd.parent_visit_detail_id,
   vd.visit_occurrence_id
 FROM @src_catalog.@src_schema.visit_detail AS vd
+WHERE
+  vd.visit_detail_start_datetime BETWEEN @study_start_date AND CURRENT_DATE /* this doesn' t work yet.Hard code instead. */
+  AND @person_exists_in_cohort('vd')

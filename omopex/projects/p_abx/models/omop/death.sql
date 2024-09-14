@@ -14,10 +14,4 @@ SELECT
   d.cause_source_concept_id
 FROM @src_catalog.@src_schema.death AS d
 WHERE
-  EXISTS(
-    SELECT
-      1
-    FROM @stg_schema.stg_cohort AS c
-    WHERE
-      c.person_id = d.person_id
-  )
+  @person_exists_in_cohort('d')

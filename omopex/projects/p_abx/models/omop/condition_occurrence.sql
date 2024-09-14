@@ -23,10 +23,4 @@ SELECT
   co.condition_status_source_value
 FROM @src_catalog.@src_schema.condition_occurrence AS co
 WHERE
-  EXISTS(
-    SELECT
-      1
-    FROM @stg_schema.stg_cohort AS c
-    WHERE
-      c.person_id = co.person_id
-  )
+  @person_exists_in_cohort('co')

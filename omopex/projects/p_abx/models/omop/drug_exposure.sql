@@ -29,3 +29,5 @@ SELECT
   de.route_source_value,
   de.dose_unit_source_value
 FROM @src_catalog.@src_schema.drug_exposure AS de
+WHERE
+  @person_exists_in_cohort('de')

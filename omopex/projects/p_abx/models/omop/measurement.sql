@@ -29,4 +29,7 @@ SELECT
   m.meas_event_field_concept_id::INT,
   m.measurement_event_id::TEXT
 /* m.unique_key::TEXT, */ /* m.datasource::TEXT, */ /* m.updated_at::DATETIME */
-FROM @src_catalog.@src_schema.measurement AS m /* WHERE */ /*   m.measurement_datetime BETWEEN @start_ds AND @end_ds */
+FROM @src_catalog.@src_schema.measurement AS m
+WHERE
+  m.measurement_datetime BETWEEN @study_start_date AND CURRENT_DATE /* this doesn' t work yet.Hard code instead. */
+  AND @person_exists_in_cohort('m')

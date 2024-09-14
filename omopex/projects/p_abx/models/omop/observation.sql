@@ -28,3 +28,6 @@ SELECT
   o.obs_event_field_concept_id
 /* o.unique_key, */ /* o.datasource, */ /* o.updated_at */
 FROM @src_catalog.@src_schema.observation AS o
+WHERE
+  o.observation_datetime BETWEEN @study_start_date AND CURRENT_DATE /* this doesn' t work yet.Hard code instead. */
+  AND @person_exists_in_cohort('o')

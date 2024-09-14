@@ -6,7 +6,6 @@ from sqlmesh.core.config import Config
 from omopex.settings import (
     SQLMeshSettings,
     OMOPSettings,
-    SourceShema,
     CdmSourceSettings,
 )
 
@@ -26,14 +25,9 @@ variables = OMOPSettings(
     # src_catalog=os.getenv("DATABRICKS_CATALOG"),
     src_schema="gold",
     # dest_catalog=os.getenv("DATABRICKS_CATALOG"),
-    settings=settings,
-)
+    settings={},
+).model_dump(mode="json")
 
-config = Config(
-    **dict(
-        SQLMeshSettings(
-            project=project,
-            variables=variables.model_dump(mode="json"),
-        )
-    )
-)
+
+variables.update({"study_start_date": "2019-01-01"})
+config = Config(**dict(SQLMeshSettings(project=project, variables=variables)))
