@@ -16,3 +16,5 @@ SELECT
   c.valid_end_date,
   c.invalid_reason
 FROM @src_catalog.@src_schema.concept AS c
+WHERE
+  @concept_exists_in_shard('c', 'concept_id')
