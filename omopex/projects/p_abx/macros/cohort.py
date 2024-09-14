@@ -71,5 +71,5 @@ def calculate_vocab_size(evaluator: MacroEvaluator) -> str:
             queries.append(q)
 
     query = " UNION ".join(queries)
-    print(query)
+
     return query

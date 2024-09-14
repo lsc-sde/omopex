@@ -12,7 +12,6 @@ from omopex.projects.p_abx.config import variables
 
 stg_schema = variables.get("stg_schema")
 model_name = f"{stg_schema}.stg_vocab_shard"
-print(model_name)
 
 
 @model(

@@ -14,7 +14,7 @@ from sqlmesh.core.config import (
 )
 from sqlmesh.core.config.format import FormatConfig
 from sqlmesh.core.model import ModelKindName
-from pydantic import BaseModel, computed_field, Field
+from pydantic import BaseModel, computed_field, Field, ConfigDict
 from enum import Enum
 from typing import Dict, Any, Optional
 from datetime import date
@@ -101,6 +101,8 @@ class SQLMeshSettings(BaseModel):
         variables (dict): A dictionary of variables.
         format (FormatConfig): The configuration for formatting.
     """
+
+    model_config = ConfigDict(protected_namespaces=())
 
     project: str
     model_defaults: ModelDefaultsConfig = ModelDefaultsConfig(
@@ -284,7 +286,7 @@ class ModelSettings(BaseModel):
     cfg_location: Optional[LocationSettings] = LocationSettings()
     cfg_measurement: Optional[MeasurementSettings] = MeasurementSettings()
     cfg_note_nlp: Optional[NoteNlpSettings] = NoteNlpSettings()
-    cfg_note: Optional[NoteSettings] = NoteSettings
+    cfg_note: Optional[NoteSettings] = NoteSettings()
     cfg_observation_period: Optional[ObservationPeriodSettings] = (
         ObservationPeriodSettings()
     )
