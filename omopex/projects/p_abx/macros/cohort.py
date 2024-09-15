@@ -1,8 +1,7 @@
-from sqlmesh import macro, SQL, ExecutionContext
-from sqlmesh.core.macros import MacroEvaluator, RuntimeStage
-import sqlglot.expressions as exp
+from sqlmesh import macro
+from sqlmesh.core.macros import MacroEvaluator
 from typing import Any
-from datetime import datetime
+from omopex.macros.common import QueryGenerator
 
 # Macros seem to only be able to get evaluator if they are within the project/macros folder and not in the root omopex/macros folder
 # This needs further investigation
@@ -52,24 +51,10 @@ def calculate_vocab_size(evaluator: MacroEvaluator) -> str:
         "vocabulary",
     ]
 
-    src_catalog = evaluator.var("src_catalog")
-    src_schema = evaluator.var("src_schema")
-    dest_schema = evaluator.var("dest_schema")
+    q = QueryGenerator(
+        src_catalog=evaluator.var("src_catalog"),
+        src_schema=evaluator.var("src_schema"),
+        dest_schema=evaluator.var("dest_schema"),
+    )
 
-    source = f"{src_catalog}.{src_schema}"
-
-    queries = []
-    for s in [source, dest_schema]:
-        for t in vocab_tables:
-            q = f"""
-          select
-            '{s}' as catalog_schema,
-            '{t}' as table_name,
-            count(*) as n
-          from {s}.{t}
-          """
-            queries.append(q)
-
-    query = " UNION ".join(queries)
-
-    return query
+    return q.generate_vocab_size_query()

@@ -5,25 +5,58 @@ from typing import Any
 from datetime import datetime
 
 
-# @macro()
-# def some_macro_common_for_all_projects(evaluator: MacroEvaluator, key: str) -> Any:
+class QueryGenerator:
+    def __init__(self, src_catalog: str, src_schema: str, dest_schema: str):
+        self.src_catalog = src_catalog
+        self.src_schema = src_schema
+        self.dest_schema = dest_schema
 
-#     return "'this is a common macro'"
+        self.vocab_tables = [
+            "concept_ancestor",
+            "concept_class",
+            "concept_relationship",
+            "concept_synonym",
+            "concept",
+            "domain",
+            "relationship",
+            "source_to_concept_map",
+            "vocabulary",
+        ]
+        self.non_vocab_tables = [
+            "condition_occurrence",
+            "cdm_source",
+            "condition_era",
+            "cost",
+            "death",
+            "device_exposure",
+            "drug_era",
+            "drug_exposure",
+            "measurement",
+            "observation_period",
+            "observation",
+            "payer_plan_period",
+            "person",
+            "procedure_occurrence",
+            "provider",
+            "visit_detail",
+            "visit_occurrence",
+        ]
 
+    def generate_vocab_size_query(self) -> str:
+        source = f"{self.src_catalog}.{self.src_schema}"
 
-# @macro()
-# def between_dates(evaluator: MacroEvaluator, model: str, column: str):
-#     print(evaluator.runtime_stage)
-#     settings = evaluator.var("cfg")
+        queries = []
+        for s in [source, self.dest_schema]:
+            for t in self.vocab_tables:
+                q = f"""
+                    select
+                        '{s}' as catalog_schema,
+                        '{t}' as table_name,
+                        count(*) as n
+                    from {s}.{t}
+                    """
+                queries.append(q)
 
-#     model_settings = settings.get("cfg_" + model)
-#     if not model_settings:
-#         raise KeyError(f"cfg_{model} settings not found in settings variable.")
+        query = " UNION ".join(queries)
 
-#     start_date = model_settings.get("start_date")
-#     end_date = model_settings.get("end_date")
-#     if not start_date:
-#         start_date = datetime(2010, 1, 1)
-#     if not end_date:
-#         end_date = datetime.today()
-#     return f"{column} between {start_date} and {end_date}"
+        return query
