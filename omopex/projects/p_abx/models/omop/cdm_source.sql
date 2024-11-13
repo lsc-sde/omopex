@@ -15,6 +15,6 @@ SELECT
   '5.4' AS cdm_version,
   coalesce(vocabulary_version, 'Unknown') AS vocabulary_version,
   75626 AS cdm_version_concept_id
-FROM @src_catalog.@src_schema.vocabulary
+FROM @src_catalog.@vocab_schema.vocabulary
 WHERE
   vocabulary_id = 'None'

@@ -333,6 +333,7 @@ class OMOPSettings(BaseModel):
     src_schema: Optional[SourceShema | str] = SourceShema.GOLD
     # dest_catalog: str
     # model_settings: Optional[ModelSettings] = ModelSettings()
+    vocab_schema: Optional[str] = "vocab"
 
     settings: Optional[dict]
 

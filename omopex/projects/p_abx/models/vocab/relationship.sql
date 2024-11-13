@@ -11,4 +11,4 @@ SELECT
   r.defines_ancestry,
   r.reverse_relationship_id,
   r.relationship_concept_id
-FROM @src_catalog.@src_schema.relationship AS r
+FROM @src_catalog.@vocab_schema.relationship AS r

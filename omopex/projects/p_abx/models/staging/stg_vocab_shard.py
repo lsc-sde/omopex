@@ -56,6 +56,7 @@ def execute(
     # print(config)
     src_schema = variables.get("src_schema")
     dest_schema = context.var("dest_schema")
+    vocab_schema = variables.get("vocab_schema")
 
     df_concept_columns: pd.DataFrame = context.fetchdf(
         query=f"""
@@ -89,12 +90,12 @@ def execute(
     distinct_concept_ids as (select distinct concept_id from cte_concept_ids),
     all_concept_ids as (
         select descendant_concept_id as concept_id
-        from {src_catalog}.{src_schema}.concept_ancestor ca
+        from {src_catalog}.{vocab_schema}.concept_ancestor ca
         join distinct_concept_ids dci
         on dci.concept_id = ca.ancestor_concept_id
         union
         select ca.ancestor_concept_id as concept_id
-        from {src_catalog}.{src_schema}.concept_ancestor ca
+        from {src_catalog}.{vocab_schema}.concept_ancestor ca
         join distinct_concept_ids dci
         on  dci.concept_id = ca.descendant_concept_id
         union
