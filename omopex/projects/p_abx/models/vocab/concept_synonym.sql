@@ -9,5 +9,5 @@ SELECT
   cs.concept_synonym_name,
   cs.language_concept_id
 FROM @src_catalog.@vocab_schema.concept_synonym AS cs
-WHERE
-  @concept_exists_in_shard('cs', 'concept_id')
+-- WHERE
+--   @concept_exists_in_shard('cs', 'concept_id')

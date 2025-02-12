@@ -28,7 +28,6 @@ def execute(
     execution_time: datetime,
     **kwargs: Any,
 ) -> pd.DataFrame:
-
     non_vocab_tables = [
         "condition_occurrence",
         "cdm_source",
@@ -76,32 +75,13 @@ def execute(
 
     concept_ids = []
     queries = []
+    df_arr = []
+
     for row in df_concept_columns.itertuples():
         # print("Getting distinct concept_ids for ", row.column_name)
-        query: str = (
-            f"select distinct {row.column_name} as concept_id from {row.table_catalog}.{row.table_schema}.{row.table_name}"
-        )
-        queries.append(query)
+        query: str = f"select distinct {row.column_name} as concept_id from {row.table_catalog}.{row.table_schema}.{row.table_name}"
+        df = context.fetchdf(query).dropna()
+        df_arr.append(df)
 
-    query = " UNION ".join(queries)
-
-    final_query = f"""
-    with cte_concept_ids as ({query}),
-    distinct_concept_ids as (select distinct concept_id from cte_concept_ids),
-    all_concept_ids as (
-        select descendant_concept_id as concept_id
-        from {src_catalog}.{vocab_schema}.concept_ancestor ca
-        join distinct_concept_ids dci
-        on dci.concept_id = ca.ancestor_concept_id
-        union
-        select ca.ancestor_concept_id as concept_id
-        from {src_catalog}.{vocab_schema}.concept_ancestor ca
-        join distinct_concept_ids dci
-        on  dci.concept_id = ca.descendant_concept_id
-        union
-        select concept_id from distinct_concept_ids dci
-        )
-    select distinct concept_id from all_concept_ids
-    """
-    df = context.fetchdf(final_query).dropna()
+    df = pd.concat(df_arr).dropna().drop_duplicates()
     return df

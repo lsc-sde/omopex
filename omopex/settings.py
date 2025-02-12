@@ -1,24 +1,22 @@
-from dotenv import find_dotenv, load_dotenv
-
-load_dotenv(find_dotenv())
-
 import os
+from datetime import date
+from enum import Enum
+from typing import Any, Dict, Optional
+
+from dotenv import find_dotenv, load_dotenv
+from pydantic import BaseModel, ConfigDict, Field, computed_field
 from sqlmesh.core.config import (
-    Config,
-    ModelDefaultsConfig,
-    GatewayConfig,
     DatabricksConnectionConfig,
-    PostgresConnectionConfig,
     DuckDBConnectionConfig,
+    GatewayConfig,
+    ModelDefaultsConfig,
     MSSQLConnectionConfig,
+    PostgresConnectionConfig,
 )
 from sqlmesh.core.config.format import FormatConfig
 from sqlmesh.core.model import ModelKindName
-from pydantic import BaseModel, computed_field, Field, ConfigDict
-from enum import Enum
-from typing import Dict, Any, Optional
-from datetime import date
 
+load_dotenv(find_dotenv())
 ###############################################################################
 # SQLMESH CONFIGURATION
 ###############################################################################
@@ -110,8 +108,8 @@ class SQLMeshSettings(BaseModel):
     )
     gateways: Dict[str, GatewayConfig] = {
         "databricks": gateway_databricks,
-        "mssql": gateway_mssql,
-        "duckdb": gateway_duckdb,
+        # "mssql": gateway_mssql,
+        # "duckdb": gateway_duckdb,
     }
     default_gateway: str = default_gateway
     variables: Dict[str, Any]

@@ -6,15 +6,10 @@ build-backend = "setuptools.build_meta"
 name = "omopex"
 description = "Python application generating project-specific OMOP databases."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 license = { file = "LICENSE" }
 authors = [{ name = "vvcb" }]
-dependencies = [
-    "pydantic-settings",
-    "python-dotenv",
-    "graphviz",
-    "sqlmesh[web,databricks,postgres,github]",
-]
+dependencies = ["pydantic-settings", "python-dotenv"]
 dynamic = ["version"]
 
 [tool.setuptools]
@@ -29,17 +24,18 @@ Homepage = "https://github.com/lsc-sde/omopex"
 
 [project.optional-dependencies]
 
-dev = [
-    "black",
-    "mkdocs-material",
-    "mkdocs",
-    "mkdocstrings-python",
-    "mkdocstrings",
-    "nbstripout",
-    "pre-commit",
-]
+databricks = ["sqlmesh[databricks,postgres]>=0.152.0"]
+mssql = ["sqlmesh[mssql]>=0.152.0"]
 
-mssql = ["sqlmesh[mssql]"]
+[dependency-groups]
+dev = [
+    "jupyterlab>=4.3.4",
+    "mkdocs>=1.6.1",
+    "mkdocstrings>=0.27.0",
+    "mkdocstrings-python>=1.12.2",
+    "pre-commit>=4.0.1",
+    "ruff>=0.7.4",
+]
 
 
 [tool.isort]

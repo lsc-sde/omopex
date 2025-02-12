@@ -15,6 +15,6 @@ SELECT
   stcm.valid_end_date,
   stcm.invalid_reason
 FROM @src_catalog.@vocab_schema.source_to_concept_map AS stcm
-WHERE
-  @concept_exists_in_shard('stcm', 'source_concept_id')
-  OR @concept_exists_in_shard('stcm', 'target_concept_id')
+-- WHERE
+--   @concept_exists_in_shard('stcm', 'source_concept_id')
+--   OR @concept_exists_in_shard('stcm', 'target_concept_id')
