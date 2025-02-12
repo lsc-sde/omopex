@@ -6,16 +6,16 @@ MODEL (
 
 /* This is the patient table. */
 SELECT
-  p.person_id,
+  p.person_id::BIGINT,
   p.gender_concept_id,
-  p.year_of_birth::INT,
-  p.month_of_birth::INT,
+  p.year_of_birth::BIGINT,
+  p.month_of_birth::BIGINT,
   1 AS day_of_birth,
   p.race_concept_id,
   p.ethnicity_concept_id,
-  p.location_id,
-  p.provider_id,
-  p.care_site_id,
+  p.location_id::BIGINT,
+  p.provider_id::BIGINT,
+  p.care_site_id::BIGINT,
   NULL AS person_source_value,
   NULL AS gender_source_value,
   NULL AS gender_source_concept_id,
